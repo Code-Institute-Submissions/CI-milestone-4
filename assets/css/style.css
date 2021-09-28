@@ -71,10 +71,42 @@ header {
   background: #1dc690;
 }
 
+.category {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  margin-left: var(--category-padding);
+  margin-top: calc(var(--category-padding) + var(--header-height));
+  height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
+  width: 25vw;
+  min-width: 300px;
+  background: #c4c4c4;
+  border-radius: 15px;
+}
+
+.category-heading {
+  position: relative;
+  height: 80px;
+  width: 100%;
+  background: #278ab0;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.category-heading h2 {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 35px;
+  width: calc(100% - 40px);
+  font-size: 24px;
+  line-height: 28px;
+}
+
 .category-form {
   display: inline-block;
   margin-left: var(--category-padding);
   margin-top: calc(var(--category-padding) + var(--header-height));
+  margin-right: var(--category-padding);
   height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
   width: 25vw;
   min-width: 300px;
@@ -89,7 +121,7 @@ header {
   border-radius: 15px 15px 0px 0px;
 }
 
-.category-form-heading input {
+#category-input {
   margin-top: 20px;
   margin-left: 20px;
   height: 35px;
@@ -99,4 +131,50 @@ header {
   font-size: 24px;
   line-height: 28px;
   text-align: center;
+}
+
+.todo {
+  position: relative;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  height: 60px;
+  width: calc(100% - 40px);
+  background: #eaeae0;
+  border-radius: 5px;
+}
+
+.todo.form {
+  margin-top: 20px;
+}
+
+.todo-input {
+  margin-top: 15px;
+  margin-left: 5px;
+  height: calc(100% - 30px);
+  width: calc(100% - 10px);
+  border: none;
+  font-size: 16px;
+  text-align: center;
+}
+
+.todo div {
+  display: flex;
+  position: absolute;
+  top: 15px;
+  left: 5px;
+  height: calc(100% - 30px);
+  width: calc(100% - 80px);
+}
+
+.todo div h3 {
+  align-self: center;
+  font-size: 16px;
+}
+
+.todo button {
+  float: right;
+  margin-top: 20px;
+  margin-right: 5px;
+  height: 20px;
+  width: 20px;
 }

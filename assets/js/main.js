@@ -44,5 +44,9 @@ fetch("https://type.fit/api/quotes")
   .then((response) => response.json())
   .then((data) => {
     let randomQuote = data[Math.floor(Math.random()*data.length)];
-    $("#quote").children("p").text(`"${randomQuote.text}"\n- ${randomQuote.author}`)
+    if (randomQuote.author) {
+      $("#quote").children("p").text(`"${randomQuote.text}"\n- ${randomQuote.author}`)
+    } else {
+      $("#quote").children("p").text(`"${randomQuote.text}"`);
+    }
   });

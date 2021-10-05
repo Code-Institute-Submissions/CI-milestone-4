@@ -1,9 +1,9 @@
 import Todo from "./todo.js";
 
 class Category {
-  constructor(index, title) {
-    this.index = index;
+  constructor(title) {
     this.title = title;
+    this.index = 0;
     this.todos = [];
   }
   
@@ -12,6 +12,7 @@ class Category {
   }
   
   generateHTML() {
+    // The map call adds all child todos html
     return `<div class="category" data-category-index=${this.index}>
               <div class="category-heading">
                 <h2>${this.title}</h2>
@@ -20,14 +21,24 @@ class Category {
                 </div>
               </div>
               <div class="todo form"><input type="text" name="todo-input" id=${"todo-input-" + this.index} class="todo-input" placeholder="Input todo"></div>
+              ${this.todos.map(todo => todo.html).join("\n")}
             </div>`
   }
 
+  set newIndex(index) {
+    this.index = index;
+  }
+
+  refreshTodos() {
+    // The combination of a destructured assignment and an entries() call to access element and its index
+    for (let [index, todo] of this.todos.entries()) {
+      // Send an array to set both the todo's categoryiIndex and index
+      todo.newIndices = [this.index, index];
+    }
+  }
+
   addTodo(todo) {
-    // TODO: Improve indices binding (goes for Categories too)
-    let newTodo = new Todo(this.index, this.todos.length, todo);
-    this.todos.push(newTodo);
-    $(`.category[data-category-index=${this.index}]`).children(".todo.form").after(newTodo.html);
+    this.todos.push(new Todo(todo));
   }
 }
 

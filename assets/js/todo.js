@@ -1,8 +1,8 @@
 class Todo {
-  constructor(categoryIndex, index, text) {
-    this.categoryIndex = categoryIndex;
-    this.index = index;
+  constructor(text) {
     this.text = text;
+    this.categoryIndex = 0;
+    this.index = 0;
     this.completed = false;
     this.prioritised = false;
   }
@@ -19,6 +19,13 @@ class Todo {
               <button class="todo-delete">D</button>
             </div>`
   }
+
+  set newIndices([categoryindex, index]) {
+    this.categoryIndex = categoryindex;
+    this.index = index;
+  }
+
+  // Add toggles for completed and prioritised
 }
 
 export default Todo;

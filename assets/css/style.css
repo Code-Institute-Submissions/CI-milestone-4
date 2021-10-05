@@ -12,6 +12,7 @@
 }
 
 body {
+  display: inline-flex;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
@@ -71,11 +72,13 @@ header {
   background: #1dc690;
 }
 
+#category-container {
+  float: left;
+}
+
 .category {
   display: inline-block;
-  position: relative;
-  top: 0;
-  margin-left: var(--category-padding);
+  margin-right: var(--category-padding);
   margin-top: calc(var(--category-padding) + var(--header-height));
   height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
   width: 25vw;
@@ -103,7 +106,7 @@ header {
 }
 
 .category-form {
-  display: inline-block;
+  float: left;
   margin-left: var(--category-padding);
   margin-top: calc(var(--category-padding) + var(--header-height));
   margin-right: var(--category-padding);

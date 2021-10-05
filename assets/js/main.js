@@ -22,6 +22,11 @@ $("#category-input").on("keyup", function(evt)  {
 });
 
 // Use this type of listener to allow dynamic HTML
+$(document).on("click", ".category-delete", function() {
+  ToDoApp.categories.splice($(this).parents(".category").data("category-index"), 1);
+  redraw();
+});
+
 $(document).on("keyup", ".todo-input", function(evt) {
   if (evt.key === "Enter") {
     ToDoApp.categories[$(this).parents(".category").data("category-index")].addTodo($(this).val());
@@ -30,7 +35,7 @@ $(document).on("keyup", ".todo-input", function(evt) {
   }
 });
 
-// Uses helper function in Todo class to toggle associated state
+// Uses helper functions in Todo class to toggle associated state
 $(document).on("click", ".todo-completed", function() {
   let todo = $(this).parent();
   ToDoApp.categories[todo.parent().data("category-index")].todos[todo.data("index")].toggleCompleted();

@@ -1,9 +1,21 @@
 import Category from "./category.js";
 import Todo from "./todo.js";
 
+// Create example content
+let exampleCategory = new Category("This is a category");
+exampleCategory.addTodo("This is a prioritised todo");
+exampleCategory.todos[0].togglePrioritised();
+exampleCategory.addTodo("This is a todo");
+exampleCategory.addTodo("This is a completed todo");
+exampleCategory.todos[2].toggleCompleted();
+
 window.ToDoApp = {
-  categories: []
-};
+  categories: [
+    exampleCategory
+  ]
+}
+
+redraw();
 
 // Used to allow the scroll wheel to scroll horizontally
 document.addEventListener("wheel", function(evt) {

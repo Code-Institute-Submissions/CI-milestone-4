@@ -1,7 +1,6 @@
 class Todo {
   constructor(text) {
     this.text = text;
-    this.categoryIndex = 0;
     this.index = 0;
     this.completed = false;
     this.prioritised = false;
@@ -12,7 +11,7 @@ class Todo {
   }
   
   generateHTML() {
-    return `<div class="todo" data-categoryIndex=${this.categoryIndex} data-index=${this.index}>
+    return `<div class="todo ${this.completed ? "completed" : ""} ${this.prioritised ? "prioritised" : ""}" data-index=${this.index}>
               <div><h3>${this.text}</h3></div>
               <button class="todo-completed">${this.completed ? "I" : "C"}</button>
               <button class="todo-prioritised">${this.prioritised ? "N" : "P"}</button>
@@ -25,7 +24,14 @@ class Todo {
     this.index = index;
   }
 
-  // Add toggles for completed and prioritised
+  // Toggles to changed associated state
+  toggleCompleted() {
+    this.completed = !this.completed;
+  }
+
+  togglePrioritised() {
+    this.prioritised = !this.prioritised;
+  }
 }
 
 export default Todo;

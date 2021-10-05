@@ -21,7 +21,14 @@ class Category {
                 </div>
               </div>
               <div class="todo form"><input type="text" name="todo-input" id=${"todo-input-" + this.index} class="todo-input" placeholder="Input todo"></div>
-              ${this.todos.map(todo => todo.html).join("\n")}
+              ${
+                // Create copy of todo array to prevent sort mutating original array then sort by priority followed by completion
+                [...this.todos]
+                  .sort((a, b) => b.prioritised - a.prioritised)
+                  .sort((a, b) => a.completed - b.completed)
+                  .map(todo => todo.html)
+                  .join("\n")
+              }
             </div>`
   }
 

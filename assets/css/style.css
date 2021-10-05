@@ -181,3 +181,11 @@ header {
   height: 20px;
   width: 20px;
 }
+
+.completed h3 {
+  text-decoration: line-through;
+}
+
+.prioritised {
+  background: #fefecc;
+}

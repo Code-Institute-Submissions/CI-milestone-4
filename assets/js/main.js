@@ -5,6 +5,7 @@ window.ToDoApp = {
   categories: []
 };
 
+// Used to allow the scroll wheel to scroll horizontally
 document.addEventListener("wheel", function(evt) {
     evt.preventDefault();
     document.documentElement.scrollLeft += evt.deltaY;
@@ -29,15 +30,17 @@ $(document).on("keyup", ".todo-input", function(evt) {
   }
 });
 
-// Improve these toggles with a Todo helper function
-$(document).on("click", ".todo-completed", function(evt) {
+// Uses helper function in Todo class to toggle associated state
+$(document).on("click", ".todo-completed", function() {
   let todo = $(this).parent();
-  ToDoApp.categories[todo.data("categoryIndex")].todos[todo.data("index")].completed = !ToDoApp.categories[todo.data("categoryIndex")].todos[todo.data("index")].completed;
+  ToDoApp.categories[todo.parent().data("category-index")].todos[todo.data("index")].toggleCompleted();
+  redraw();
 });
 
-$(document).on("click", ".todo-prioritised", function(evt) {
+$(document).on("click", ".todo-prioritised", function() {
   let todo = $(this).parent();
-  ToDoApp.categories[todo.data("categoryIndex")].todos[todo.data("index")].prioritised = !ToDoApp.categories[todo.data("categoryIndex")].todos[todo.data("index")].prioritised;
+  ToDoApp.categories[todo.parent().data("category-index")].todos[todo.data("index")].togglePrioritised();
+  redraw();
 });
 
 // Redraws dynamic part of app to prevent dead html and refreshes index binding of categories and their todos

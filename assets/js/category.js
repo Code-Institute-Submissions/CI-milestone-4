@@ -52,6 +52,10 @@ class Category {
   addTodo(todo) {
     this.todos.push(new Todo(todo));
   }
+
+  deleteTodo(index) {
+    this.todos.splice(index, 1);
+  }
 }
 
 export default Category;

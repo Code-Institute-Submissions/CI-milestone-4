@@ -43,6 +43,12 @@ $(document).on("click", ".todo-prioritised", function() {
   redraw();
 });
 
+$(document).on("click", ".todo-delete", function() {
+  let todo = $(this).parent();
+  ToDoApp.categories[todo.parent().data("category-index")].deleteTodo(todo.data("index"));
+  redraw();
+});
+
 // Add ability to delete Categories and associated reassign category index function
 
 // Redraws dynamic part of app to prevent dead html and refreshes index binding of categories and their todos

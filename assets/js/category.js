@@ -32,6 +32,11 @@ class Category {
             </div>`
   }
 
+  // Helper function that returns number of completed todos
+  get completedTodos() {
+    return this.todos.reduce(((sum, todo) => sum += todo.completed), 0);
+  }
+
   set newIndex(index) {
     this.index = index;
   }

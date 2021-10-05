@@ -43,6 +43,8 @@ $(document).on("click", ".todo-prioritised", function() {
   redraw();
 });
 
+// Add ability to delete Categories and associated reassign category index function
+
 // Redraws dynamic part of app to prevent dead html and refreshes index binding of categories and their todos
 function redraw() {
   $("#category-container").empty();
@@ -51,10 +53,14 @@ function redraw() {
     category.newIndex = index;
     category.refreshTodos();
     $("#category-container").append(category.html);
+    // Sets width of each progress bar to percentage of that categories completed todos
+    $(`.${index}-progress`).css("width", category.completedTodos / category.todos.length * 100 + "%")
   }
+
+  // Sets width of .total-progress to the percentage of todos complete (completed todos / total todos * 100)
+  $(".total-progress").animate({width: ToDoApp.categories.reduce(((sum, category) => sum += category.completedTodos), 0) / ToDoApp.categories.reduce(((sum, category) => sum += category.todos.length), 0) * 100 + "%"});
 }
 
-// Add ability to delete Categories and associated reassign category index function
 
 fetch("https://type.fit/api/quotes")
   .then((response) => response.json())

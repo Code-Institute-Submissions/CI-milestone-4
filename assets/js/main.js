@@ -48,6 +48,7 @@ $("#category-input").on("keyup", function(evt)  {
 
 // Use this type of listener to allow dynamic HTML
 $(document).on("click", ".category-delete", function() {
+  // Use confirm dialog to confirm deletion
   if (confirm("Are you sure you want to delete this category?")) {
     ToDoApp.categories.splice($(this).parents(".category").data("category-index"), 1);
     redraw();
@@ -59,7 +60,7 @@ $(document).on("keyup", ".todo-input", function(evt) {
     let input = $(this).val().trim();
     $(this).val("");
     if (input.length === 0) {
-      $(this).attr("placeholder", "Must contain < 1 character");
+      $(this).attr("placeholder", "Must contain > 1 character");
     } else {
       $(this).attr("placeholder", "Input todo");
       ToDoApp.categories[$(this).parents(".category").data("category-index")].addTodo(input);
@@ -123,37 +124,6 @@ function redraw() {
   // Sets width of .total-progress to the percentage of todos complete (completed todos / total todos * 100)
   $(".total-progress").animate({width: ToDoApp.categories.reduce(((sum, category) => sum += category.completedTodos), 0) / ToDoApp.categories.reduce(((sum, category) => sum += category.todos.length), 0) * 100 + "%"});
 }
-
-function ConfirmDialog(message) {
-  $('<div></div>').appendTo('body')
-    .html('<div><h6>' + message + '?</h6></div>')
-    .dialog({
-      modal: true,
-      title: 'Delete message',
-      zIndex: 10000,
-      autoOpen: true,
-      width: 'auto',
-      resizable: false,
-      buttons: {
-        Yes: function() {
-          // $(obj).removeAttr('onclick');                                
-          // $(obj).parents('.Parent').remove();
-
-          $('body').append('<h1>Confirm Dialog Result: <i>Yes</i></h1>');
-
-          $(this).dialog("close");
-        },
-        No: function() {
-          $('body').append('<h1>Confirm Dialog Result: <i>No</i></h1>');
-
-          $(this).dialog("close");
-        }
-      },
-      close: function(event, ui) {
-        $(this).remove();
-      }
-    });
-};
 
 fetch("https://type.fit/api/quotes")
   .then((response) => response.json())

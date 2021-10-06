@@ -32,7 +32,7 @@ $("#category-input").on("keyup", function(evt)  {
   if (evt.key === "Enter") {
     let input = $(this).val().trim();
     $(this).val("");
-    // If category input is greater than 30 characters replace placeholder with error message
+    // If category input is greater than 30 characters or less than 1 non whitespace character replace placeholder with error message
     if (input.length > 30) {
       $(this).attr("placeholder", "Must be under 30 characters");
     } else if (input.length === 0) {
@@ -125,10 +125,12 @@ function redraw() {
   $(".total-progress").animate({width: ToDoApp.categories.reduce(((sum, category) => sum += category.completedTodos), 0) / ToDoApp.categories.reduce(((sum, category) => sum += category.todos.length), 0) * 100 + "%"});
 }
 
+// Fetch a quote from a motivational quote API and select one at random
 fetch("https://type.fit/api/quotes")
   .then((response) => response.json())
   .then((data) => {
     let randomQuote = data[Math.floor(Math.random()*data.length)];
+    // As some quotes don't have an author they get displayed differently
     if (randomQuote.author) {
       $("#quote").children("p").text(`"${randomQuote.text}"\n- ${randomQuote.author}`)
     } else {

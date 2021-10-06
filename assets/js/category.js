@@ -17,7 +17,7 @@ class Category {
     return `<div class="category" data-category-index=${this.index}>
               <div class="category-heading">
                 <h2>${this.title}</h2>
-                <button class="category-delete">D</button>
+                <button class="category-delete"><i class="fas fa-trash-alt"></i></button>
                 <div class="progress-container">
                   <div class="progress ${this.index}-progress"></div>
                 </div>

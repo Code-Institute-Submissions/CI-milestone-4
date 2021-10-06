@@ -13,9 +13,9 @@ class Todo {
   generateHTML() {
     return `<div class="todo ${this.completed ? "completed" : ""} ${this.prioritised ? "prioritised" : ""}" data-index=${this.index}>
               <div><h3>${this.text}</h3></div>
-              <button class="todo-completed">${this.completed ? "<i class='fas fa-times'></i>" : "<i class='fas fa-check'></i>"}</button>
-              <button class="todo-prioritised">${this.prioritised ? "<i class='fas fa-star'></i>" : "<i class='far fa-star'></i>"}</button>
-              <button class="todo-delete"><i class="fas fa-trash-alt"></i></button>
+              <button class="todo-completed" title="Complete todo">${this.completed ? "<i class='fas fa-times'></i>" : "<i class='fas fa-check'></i>"}</button>
+              <button class="todo-prioritised" title="Prioritise todo">${this.prioritised ? "<i class='fas fa-star'></i>" : "<i class='far fa-star'></i>"}</button>
+              <button class="todo-delete" title="Delete todo"><i class="fas fa-trash-alt"></i></button>
             </div>`
   }
 

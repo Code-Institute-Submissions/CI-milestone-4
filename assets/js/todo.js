@@ -19,8 +19,7 @@ class Todo {
             </div>`
   }
 
-  set newIndices([categoryindex, index]) {
-    this.categoryIndex = categoryindex;
+  set newIndices(index) {
     this.index = index;
   }
 

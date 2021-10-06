@@ -46,8 +46,7 @@ class Category {
   refreshTodos() {
     // The combination of a destructured assignment and an entries() call to access element and its index
     for (let [index, todo] of this.todos.entries()) {
-      // Send an array to set both the todo's categoryiIndex and index
-      todo.newIndices = [this.index, index];
+      todo.newIndices = index;
     }
   }
 

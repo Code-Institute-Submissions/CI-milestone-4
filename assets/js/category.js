@@ -1,10 +1,11 @@
 import Todo from "./todo.js";
 
 class Category {
-  constructor(title) {
+  // Constructor using default values to allow both easier and more controlled construction
+  constructor(title, index = 0, todos = []) {
     this.title = title;
-    this.index = 0;
-    this.todos = [];
+    this.index = index;
+    this.todos = todos;
   }
   
   get html() {

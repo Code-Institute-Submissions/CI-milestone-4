@@ -1,9 +1,9 @@
 class Todo {
-  constructor(text) {
+  constructor(text, index = 0, completed = false, prioritised = false) {
     this.text = text;
-    this.index = 0;
-    this.completed = false;
-    this.prioritised = false;
+    this.index = index;
+    this.completed = completed;
+    this.prioritised = prioritised;
   }
   
   get html() {

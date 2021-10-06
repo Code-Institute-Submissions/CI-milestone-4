@@ -15,6 +15,10 @@ window.ToDoApp = {
   ]
 }
 
+if (window.localStorage.getItem("ToDoApp") !== null ) {
+  ToDoApp = load(JSON.parse(window.localStorage.getItem("ToDoApp")));
+}
+
 redraw();
 
 // Used to allow the scroll wheel to scroll horizontally
@@ -66,10 +70,27 @@ $(document).on("click", ".todo-delete", function() {
   redraw();
 });
 
-// Add ability to delete Categories and associated reassign category index function
+// Saves data to localstorage for access later
+function save() {
+  window.localStorage.setItem("ToDoApp", JSON.stringify(window.ToDoApp));
+}
+
+// Helps parse the JSON to reassign classes
+function load(data) {
+  let loadedData = { categories: []};
+  for (let category of data.categories) {
+    let newCategory = new Category(category.title, category.index);
+    for (let todo of category.todos) {
+      newCategory.todos.push(new Todo(todo.text, todo.index, todo.completed, todo.prioritised));
+    }
+    loadedData.categories.push(newCategory);
+  }
+  return loadedData;
+}
 
 // Redraws dynamic part of app to prevent dead html and refreshes index binding of categories and their todos
 function redraw() {
+  save();
   $("#category-container").empty();
   // Using the entries() call to access both the value and its index in the array
   for (let [index, category] of ToDoApp.categories.entries()) {

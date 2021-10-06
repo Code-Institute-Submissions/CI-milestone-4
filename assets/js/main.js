@@ -30,24 +30,41 @@ document.addEventListener("wheel", function(evt) {
 // When a category title is input the input is cleared and a new category with that title is added to the apps list of categories, the app then redraws
 $("#category-input").on("keyup", function(evt)  {
   if (evt.key === "Enter") {
-    let newCategory = new Category($(this).val());
+    let input = $(this).val().trim();
     $(this).val("");
-    ToDoApp.categories.push(newCategory);
-    redraw();
+    // If category input is greater than 30 characters replace placeholder with error message
+    if (input.length > 30) {
+      $(this).attr("placeholder", "Must be under 30 characters");
+    } else if (input.length === 0) {
+      $(this).attr("placeholder", "Must contain < 1 character");
+    } else {
+      $(this).attr("placeholder", "Input Category Heading");
+      let newCategory = new Category(input);
+      ToDoApp.categories.push(newCategory);
+      redraw();
+    }
   }
 });
 
 // Use this type of listener to allow dynamic HTML
 $(document).on("click", ".category-delete", function() {
-  ToDoApp.categories.splice($(this).parents(".category").data("category-index"), 1);
-  redraw();
+  if (confirm("Are you sure you want to delete this category?")) {
+    ToDoApp.categories.splice($(this).parents(".category").data("category-index"), 1);
+    redraw();
+  }
 });
 
 $(document).on("keyup", ".todo-input", function(evt) {
   if (evt.key === "Enter") {
-    ToDoApp.categories[$(this).parents(".category").data("category-index")].addTodo($(this).val());
+    let input = $(this).val().trim();
     $(this).val("");
-    redraw();
+    if (input.length === 0) {
+      $(this).attr("placeholder", "Must contain < 1 character");
+    } else {
+      $(this).attr("placeholder", "Input todo");
+      ToDoApp.categories[$(this).parents(".category").data("category-index")].addTodo(input);
+      redraw();
+    }
   }
 });
 
@@ -65,9 +82,11 @@ $(document).on("click", ".todo-prioritised", function() {
 });
 
 $(document).on("click", ".todo-delete", function() {
-  let todo = $(this).parent();
-  ToDoApp.categories[todo.parent().data("category-index")].deleteTodo(todo.data("index"));
-  redraw();
+  if (confirm("Are you sure you want to delete this todo?")) {
+    let todo = $(this).parent();
+    ToDoApp.categories[todo.parent().data("category-index")].deleteTodo(todo.data("index"));
+    redraw();
+  }
 });
 
 // Saves data to localstorage for access later
@@ -105,6 +124,36 @@ function redraw() {
   $(".total-progress").animate({width: ToDoApp.categories.reduce(((sum, category) => sum += category.completedTodos), 0) / ToDoApp.categories.reduce(((sum, category) => sum += category.todos.length), 0) * 100 + "%"});
 }
 
+function ConfirmDialog(message) {
+  $('<div></div>').appendTo('body')
+    .html('<div><h6>' + message + '?</h6></div>')
+    .dialog({
+      modal: true,
+      title: 'Delete message',
+      zIndex: 10000,
+      autoOpen: true,
+      width: 'auto',
+      resizable: false,
+      buttons: {
+        Yes: function() {
+          // $(obj).removeAttr('onclick');                                
+          // $(obj).parents('.Parent').remove();
+
+          $('body').append('<h1>Confirm Dialog Result: <i>Yes</i></h1>');
+
+          $(this).dialog("close");
+        },
+        No: function() {
+          $('body').append('<h1>Confirm Dialog Result: <i>No</i></h1>');
+
+          $(this).dialog("close");
+        }
+      },
+      close: function(event, ui) {
+        $(this).remove();
+      }
+    });
+};
 
 fetch("https://type.fit/api/quotes")
   .then((response) => response.json())

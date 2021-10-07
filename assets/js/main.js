@@ -15,17 +15,12 @@ window.ToDoApp = {
   ]
 }
 
+// If there is a previous data in localStorage restore it
 if (window.localStorage.getItem("ToDoApp") !== null ) {
   ToDoApp = load(JSON.parse(window.localStorage.getItem("ToDoApp")));
 }
 
 redraw();
-
-// Used to allow the scroll wheel to scroll horizontally
-document.addEventListener("wheel", function(evt) {
-    evt.preventDefault();
-    document.documentElement.scrollLeft += evt.deltaY;
-});
 
 // When a category title is input the input is cleared and a new category with that title is added to the apps list of categories, the app then redraws
 $("#category-input").on("keyup", function(evt)  {

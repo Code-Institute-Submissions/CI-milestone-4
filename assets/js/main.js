@@ -106,7 +106,11 @@ function load(data) {
 // Redraws dynamic part of app to prevent dead html and refreshes index binding of categories and their todos
 function redraw() {
   save();
+
   $("#category-container").empty();
+  $("#summary").empty();
+
+
   // Using the entries() call to access both the value and its index in the array
   for (let [index, category] of ToDoApp.categories.entries()) {
     category.newIndex = index;
@@ -115,6 +119,7 @@ function redraw() {
     // Sets width of each progress bar to percentage of that categories completed todos
     $(`.${index}-progress`).css("width", category.completedTodos / category.todos.length * 100 + "%")
   }
+  $("#summary").append(`<ul>${ToDoApp.categories.map(category => category.summary).join("\n")}</ul>`);
 
   // Sets width of .total-progress to the percentage of todos complete (completed todos / total todos * 100)
   $(".total-progress").animate({width: ToDoApp.categories.reduce(((sum, category) => sum += category.completedTodos), 0) / ToDoApp.categories.reduce(((sum, category) => sum += category.todos.length), 0) * 100 + "%"});

@@ -1,4 +1,5 @@
 class Todo {
+  // Constructor using default values to allow both easier and more controlled construction
   constructor(text, index = 0, completed = false, prioritised = false) {
     this.text = text;
     this.index = index;
@@ -6,6 +7,7 @@ class Todo {
     this.prioritised = prioritised;
   }
   
+  // getter returns the html of this todo
   get html() {
     return this.generateHTML();
   }
@@ -19,7 +21,17 @@ class Todo {
             </div>`
   }
 
-  set newIndices(index) {
+  // getter returns summarised todo
+  get summary() {
+    return this.generateSummary();
+  }
+
+  generateSummary() {
+    return `<li>${this.text.length > 28 ? this.text.substring(0, 27) + "..." : this.text}</li>`
+  }
+
+  // Refresh index
+  set newIndex(index) {
     this.index = index;
   }
 

@@ -1,11 +1,12 @@
-/* TODO: comment */
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+/* Sets CSS variables */
 :root {
   --header-height: 100px;
   --category-padding: 20px;
 }
 
+/* Sets default values */
 * {
   font-family: "Roboto", sans-serif;
   margin: 0;
@@ -53,6 +54,7 @@ header {
   line-height: normal;
 }
 
+/* The progress bar, within its container, is placed on the bottom of its parent header */
 .progress-container {
   position: absolute;
   bottom: 0px;
@@ -69,12 +71,14 @@ header {
   background: #1dc690;
 }
 
+/* The category container is floated beside the category form */
 #category-container {
   float: left;
 }
 
 .category {
   display: inline-block;
+  position: relative;
   margin-right: var(--category-padding);
   margin-top: calc(var(--category-padding) + var(--header-height));
   height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
@@ -85,9 +89,10 @@ header {
 }
 
 .category-heading {
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
   height: 80px;
-  width: 100%;
   background: #278ab0;
   border-radius: 15px 15px 0px 0px;
 }
@@ -112,6 +117,26 @@ header {
   z-index: 1;
 }
 
+/*
+  The category-content div allows the todos to be scrolled while the category-header remains.
+  Within the div scroll bars are disabled.
+*/
+.category-content {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.category-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* The category-form is floated to go alongside the category-container */
 .category-form {
   float: left;
   margin-left: var(--category-padding);
@@ -143,6 +168,7 @@ header {
   text-align: center;
 }
 
+/* The summary is a list that shows categories with their prioritised todos */
 #summary {
   margin-top: 20px;
   font-size: large;
@@ -209,6 +235,7 @@ header {
   width: 20px;
 }
 
+/* The following styles are applied depending on a todo's completed or prioritised property */
 .completed h3 {
   text-decoration: line-through;
 }

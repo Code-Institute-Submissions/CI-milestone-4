@@ -67,20 +67,20 @@ $(document).on("keyup", ".todo-input", function(evt) {
 // Uses helper functions in Todo class to toggle associated state
 $(document).on("click", ".todo-completed", function() {
   let todo = $(this).parent();
-  ToDoApp.categories[todo.parent().data("category-index")].todos[todo.data("index")].toggleCompleted();
+  ToDoApp.categories[todo.parents(".category").data("category-index")].todos[todo.data("index")].toggleCompleted();
   redraw();
 });
 
 $(document).on("click", ".todo-prioritised", function() {
   let todo = $(this).parent();
-  ToDoApp.categories[todo.parent().data("category-index")].todos[todo.data("index")].togglePrioritised();
+  ToDoApp.categories[todo.parents(".category").data("category-index")].todos[todo.data("index")].togglePrioritised();
   redraw();
 });
 
 $(document).on("click", ".todo-delete", function() {
   if (confirm("Are you sure you want to delete this todo?")) {
     let todo = $(this).parent();
-    ToDoApp.categories[todo.parent().data("category-index")].deleteTodo(todo.data("index"));
+    ToDoApp.categories[todo.parents(".category").data("category-index")].deleteTodo(todo.data("index"));
     redraw();
   }
 });

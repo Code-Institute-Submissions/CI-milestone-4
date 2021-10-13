@@ -14,7 +14,7 @@ class Category {
   }
   
   generateHTML() {
-    // The map call adds all child todos html
+    // The map call adds all child todos html in priority and completion order
     return `<div class="category" id="category-${this.index}" data-category-index=${this.index}>
               <div class="category-heading">
                 <h2>${this.title}</h2>
@@ -23,15 +23,17 @@ class Category {
                   <div class="progress ${this.index}-progress"></div>
                 </div>
               </div>
-              <div class="todo form"><input type="text" name="todo-input" id=${"todo-input-" + this.index} class="todo-input" placeholder="Input todo"></div>
-              ${
-                // Create copy of todo array to prevent sort mutating original array then sort by priority followed by completion
-                [...this.todos]
-                  .sort((a, b) => b.prioritised - a.prioritised)
-                  .sort((a, b) => a.completed - b.completed)
-                  .map(todo => todo.html)
-                  .join("\n")
-              }
+              <div class="category-content">
+                <div class="todo form"><input type="text" name="todo-input" id=${"todo-input-" + this.index} class="todo-input" placeholder="Input todo"></div>
+                ${
+                  // Create copy of todo array to prevent sort mutating original array then sort by priority followed by completion and join with newlines
+                  [...this.todos]
+                    .sort((a, b) => b.prioritised - a.prioritised)
+                    .sort((a, b) => a.completed - b.completed)
+                    .map(todo => todo.html)
+                    .join("\n")
+                }
+              </div>
             </div>`
   }
 

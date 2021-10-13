@@ -41,6 +41,22 @@ $("#category-input").on("keyup", function(evt)  {
   }
 });
 
+// An event listener on every category heading to allow editing
+$(document).on("click", ".category-heading h2", function() {
+  let category = ToDoApp.categories[$(this).parents(".category").data("category-index")];
+  let editForm = `<input type="text" name="category-edit" class="category-edit" placeholder="Edit Category Heading" value="${category.title}">`;
+  $(this).parent().children("button").hide();
+  $(this).replaceWith(editForm);
+});
+
+// An event listener of each edit dialog
+$(document).on("keyup", ".category-edit", function(evt) {
+  if (evt.key === "Enter") {
+    ToDoApp.categories[$(this).parents(".category").data("category-index")].title = $(this).val();
+    redraw();
+  }
+});
+
 // Use this type of listener to allow dynamic HTML
 $(document).on("click", ".category-delete", function() {
   // Use confirm dialog to confirm deletion
@@ -56,11 +72,20 @@ $(document).on("keyup", ".todo-input", function(evt) {
     $(this).val("");
     if (input.length === 0) {
       $(this).attr("placeholder", "Must contain > 1 character");
+    } if (input.length > 240) {
+      $(this).attr("placeholder", "Must contain < 240 characters");
     } else {
       $(this).attr("placeholder", "Input todo");
       ToDoApp.categories[$(this).parents(".category").data("category-index")].addTodo(input);
       redraw();
     }
+  }
+});
+
+// If a todo is clicked and is not a .todo.form it is expanded
+$(document).on("click", ".todo", function() {
+  if (!$(this).hasClass("form")) {
+    $(this).toggleClass("expanded");
   }
 });
 

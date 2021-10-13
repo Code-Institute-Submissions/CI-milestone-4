@@ -156,7 +156,8 @@ header {
   border-radius: 15px 15px 0px 0px;
 }
 
-#category-input {
+#category-input,
+.category-edit {
   margin-top: 20px;
   margin-left: 20px;
   height: 35px;
@@ -220,11 +221,16 @@ header {
   left: 5px;
   height: calc(100% - 30px);
   width: calc(100% - 80px);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .todo div h3 {
+  height: 20px;
   align-self: center;
   font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .todo button {
@@ -233,6 +239,21 @@ header {
   margin-right: 5px;
   height: 20px;
   width: 20px;
+}
+
+/* Styling for expanded todos */
+.todo.expanded {
+  height: 180px;
+}
+
+.todo.expanded div h3 {
+  height: inherit;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.todo.expanded button {
+  margin-top: 80px;
 }
 
 /* The following styles are applied depending on a todo's completed or prioritised property */

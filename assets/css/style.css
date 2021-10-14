@@ -15,7 +15,6 @@
 }
 
 body {
-  display: inline-flex;
   white-space: nowrap;
   scrollbar-width: none;
 }
@@ -27,6 +26,7 @@ header {
   height: var(--header-height);
   width: 100vw;
   background: #278ab0;
+  z-index: 2;
 }
 
 #main-title {
@@ -40,6 +40,7 @@ header {
 }
 
 #quote {
+  display: none;
   float: right;
   margin-top: 25px;
   margin-right: 25px;
@@ -70,26 +71,79 @@ header {
   background: #1dc690;
 }
 
-/* The category container is floated beside the category form */
+/* The category-form is floated to go alongside the category-container */
+.category-form {
+  margin-top: calc(var(--header-height) + var(--category-padding));
+  margin-right: var(--category-padding);
+  margin-left: var(--category-padding);
+  height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
+  background: #c4c4c4;
+  border-radius: 15px;
+}
+
+.category-form-heading {
+  height: 80px;
+  width: 100%;
+  background: #278ab0;
+  border-radius: 15px 15px 0px 0px;
+}
+
+#category-input,
+.category-edit {
+  margin-top: 20px;
+  margin-left: 20px;
+  height: 35px;
+  width: calc(100% - 40px);
+  border: 0px;
+  border-radius: 5px;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+}
+
+/* The summary is a list that shows categories with their prioritised todos */
+#summary {
+  margin-top: 20px;
+  font-size: large;
+}
+
+#summary ul {
+  list-style: none;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+
+#summary a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#summary a:hover {
+  text-decoration: none;
+}
+
+/* 
+  The category container creates a flex-flow of row and wrap so elements tile nicely.
+  It also provides a container to scroll through categories.
+*/
 #category-container {
-  display: flex;
-  flex-flow: row wrap;
-  position: absolute;
-  top: var(--header-height);
-  right: 0;
-  bottom: 0;
-  left: calc(var(--category-width) + (2 * var(--category-padding)));
-  padding-top: var(--category-padding);
-  overflow: auto;
+  padding: var(--category-padding);
+  padding-bottom: 0;
+}
+
+a.anchor {
+  display: block;
+  position: relative;
+  top: calc(0px - (var(--header-height) + var(--category-padding)));
+  visibility: hidden;
 }
 
 .category {
-  display: inline-block;
   position: relative;
   margin-right: var(--category-padding);
   margin-bottom: var(--category-padding);
   height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
-  width: calc(50% - var(--category-padding));
+  width: 100%;
   min-width: 300px;
   background: #c4c4c4;
   border-radius: 15px;
@@ -141,60 +195,6 @@ header {
 
 .category-content::-webkit-scrollbar {
   display: none;
-}
-
-/* The category-form is floated to go alongside the category-container */
-.category-form {
-  float: left;
-  margin-left: var(--category-padding);
-  margin-top: calc(var(--category-padding) + var(--header-height));
-  margin-right: var(--category-padding);
-  height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
-  width: var(--category-width);
-  min-width: 300px;
-  background: #c4c4c4;
-  border-radius: 15px;
-}
-
-.category-form-heading {
-  height: 80px;
-  width: 100%;
-  background: #278ab0;
-  border-radius: 15px 15px 0px 0px;
-}
-
-#category-input,
-.category-edit {
-  margin-top: 20px;
-  margin-left: 20px;
-  height: 35px;
-  width: calc(100% - 40px);
-  border: 0px;
-  border-radius: 5px;
-  font-size: 24px;
-  line-height: 28px;
-  text-align: center;
-}
-
-/* The summary is a list that shows categories with their prioritised todos */
-#summary {
-  margin-top: 20px;
-  font-size: large;
-}
-
-#summary ul {
-  list-style: none;
-  padding-left: 20px;
-  padding-bottom: 10px;
-}
-
-#summary a {
-  color: inherit;
-  text-decoration: none;
-}
-
-#summary a:hover {
-  text-decoration: none;
 }
 
 .todo {
@@ -270,4 +270,47 @@ header {
 
 .prioritised {
   background: #fefecc;
+}
+
+@media (min-width: 1200px) {
+  body {
+    display: inline-flex;
+  }
+
+  #quote {
+    display: initial;
+  }
+
+  .category-form {
+    position: absolute;
+    left: var(--category-padding);
+    top: calc(var(--category-padding) + var(--header-height));
+    height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
+    width: var(--category-width);
+    margin-top: 0;
+    min-width: 300px;
+  }
+
+  #category-container {
+    display: flex;
+    flex-flow: row wrap;
+    position: absolute;
+    top: var(--header-height);
+    right: 0;
+    bottom: 0;
+    left: calc(var(--category-width) + (2 * var(--category-padding)));
+    padding-top: var(--category-padding);
+    padding-left: var(--category-padding);
+    overflow: auto;
+  }
+
+  .category {
+    margin-right: var(--category-padding);
+    margin-bottom: var(--category-padding);
+    width: calc(50% - var(--category-padding));
+  }
+
+  a.anchor {
+    top: calc(0px - var(--category-padding));
+  }
 }

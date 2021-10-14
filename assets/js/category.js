@@ -16,6 +16,7 @@ class Category {
   generateHTML() {
     // The map call adds all child todos html in priority and completion order
     return `<div class="category" id="category-${this.index}" data-category-index=${this.index}>
+              <a class="anchor" id="category-anchor-${this.index}"></a>
               <div class="category-heading">
                 <h2>${this.title}</h2>
                 <button class="category-delete" title="Delete Category"><i class="fas fa-trash-alt"></i></button>
@@ -44,7 +45,7 @@ class Category {
 
   generateSummary() {
     return `<li>
-              <h3><a href="#category-${this.index}">${this.title}</a></h3>
+              <h3><a href="#category-anchor-${this.index}">${this.title}</a></h3>
               <ul>
                 ${
                   [...this.todos]

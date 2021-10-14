@@ -3,6 +3,7 @@
 /* Sets CSS variables */
 :root {
   --header-height: 100px;
+  --category-width: 25vw;
   --category-padding: 20px;
 }
 
@@ -15,8 +16,6 @@
 
 body {
   display: inline-flex;
-  overflow-x: scroll;
-  overflow-y: hidden;
   white-space: nowrap;
   scrollbar-width: none;
 }
@@ -73,16 +72,24 @@ header {
 
 /* The category container is floated beside the category form */
 #category-container {
-  float: left;
+  display: flex;
+  flex-flow: row wrap;
+  position: absolute;
+  top: var(--header-height);
+  right: 0;
+  bottom: 0;
+  left: calc(var(--category-width) + (2 * var(--category-padding)));
+  padding-top: var(--category-padding);
+  overflow: auto;
 }
 
 .category {
   display: inline-block;
   position: relative;
   margin-right: var(--category-padding);
-  margin-top: calc(var(--category-padding) + var(--header-height));
+  margin-bottom: var(--category-padding);
   height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
-  width: 25vw;
+  width: calc(50% - var(--category-padding));
   min-width: 300px;
   background: #c4c4c4;
   border-radius: 15px;
@@ -143,7 +150,7 @@ header {
   margin-top: calc(var(--category-padding) + var(--header-height));
   margin-right: var(--category-padding);
   height: calc(100vh - var(--header-height) - (2 * var(--category-padding)));
-  width: 25vw;
+  width: var(--category-width);
   min-width: 300px;
   background: #c4c4c4;
   border-radius: 15px;

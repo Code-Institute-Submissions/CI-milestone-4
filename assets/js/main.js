@@ -25,7 +25,7 @@ redraw();
 // When a category title is input the input is cleared and a new category with that title is added to the apps list of categories, the app then redraws
 $("#category-input").on("keyup", function(evt)  {
   if (evt.key === "Enter") {
-    let input = $(this).val().trim();
+    let input = stripTags($(this).val().trim());
     $(this).val("");
     // If category input is greater than 30 characters or less than 1 non whitespace character replace placeholder with error message
     if (input.length > 30) {
@@ -52,8 +52,17 @@ $(document).on("click", ".category-heading h2", function() {
 // An event listener of each edit dialog
 $(document).on("keyup", ".category-edit", function(evt) {
   if (evt.key === "Enter") {
-    ToDoApp.categories[$(this).parents(".category").data("category-index")].title = $(this).val();
-    redraw();
+    let input = stripTags($(this).val().trim());
+    $(this).val("");
+    // If category input is greater than 30 characters or less than 1 non whitespace character replace placeholder with error message
+    if (input.length > 30) {
+      $(this).attr("placeholder", "Must be under 30 characters");
+    } else if (input.length === 0) {
+      $(this).attr("placeholder", "Must contain < 1 character");
+    } else {
+      ToDoApp.categories[$(this).parents(".category").data("category-index")].title = input;
+      redraw();
+    }
   }
 });
 
@@ -68,7 +77,7 @@ $(document).on("click", ".category-delete", function() {
 
 $(document).on("keyup", ".todo-input", function(evt) {
   if (evt.key === "Enter") {
-    let input = $(this).val().trim();
+    let input = stripTags($(this).val().trim());
     $(this).val("");
     if (input.length === 0) {
       $(this).attr("placeholder", "Must contain > 1 character");
@@ -109,6 +118,12 @@ $(document).on("click", ".todo-delete", function() {
     redraw();
   }
 });
+
+// Removes HTML tags from user input
+function stripTags(str) {
+  // Uses a regular expression to match all possible html like tags and replace them with an empty string
+  return str.replace( /(<([^>]+)>)/ig, '')
+}
 
 // Saves data to localstorage for access later
 function save() {

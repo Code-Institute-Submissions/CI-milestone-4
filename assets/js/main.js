@@ -13,7 +13,7 @@ window.ToDoApp = {
   categories: [
     exampleCategory
   ]
-}
+};
 
 // If there is a previous data in localStorage restore it
 if (window.localStorage.getItem("ToDoApp") !== null ) {
@@ -122,7 +122,7 @@ $(document).on("click", ".todo-delete", function() {
 // Removes HTML tags from user input
 function stripTags(str) {
   // Uses a regular expression to match all possible html like tags and replace them with an empty string
-  return str.replace( /(<([^>]+)>)/ig, '')
+  return str.replace( /(<([^>]+)>)/ig, '');
 }
 
 // Saves data to localstorage for access later
@@ -157,7 +157,7 @@ function redraw() {
     category.refreshTodos();
     $("#category-container").append(category.html);
     // Sets width of each progress bar to percentage of that categories completed todos
-    $(`.${index}-progress`).css("width", category.completedTodos / category.todos.length * 100 + "%")
+    $(`.${index}-progress`).css("width", category.completedTodos / category.todos.length * 100 + "%");
   }
   $("#summary").append(`<ul>${ToDoApp.categories.map(category => category.summary).join("\n")}</ul>`);
 
@@ -172,7 +172,7 @@ fetch("https://type.fit/api/quotes")
     let randomQuote = data[Math.floor(Math.random()*data.length)];
     // As some quotes don't have an author they get displayed differently
     if (randomQuote.author) {
-      $("#quote").children("p").text(`"${randomQuote.text}"\n- ${randomQuote.author}`)
+      $("#quote").children("p").text(`"${randomQuote.text}"\n- ${randomQuote.author}`);
     } else {
       $("#quote").children("p").text(`"${randomQuote.text}"`);
     }

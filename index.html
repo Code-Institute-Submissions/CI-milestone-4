@@ -9,6 +9,7 @@
     <title>ToDo</title>
 </head>
 <body>
+    <!-- The header contains two elements that are updated by the JS: #quote and the progress bar -->
     <header>
         <h1 id="main-title">ToDo</h1>
         <div id="quote"><p></p></div>
@@ -16,13 +17,16 @@
             <div class="progress total-progress"></div>
         </div>
     </header>
+    <!-- The category form acts as the input for the app, it also dynamically lists the todo summary -->
     <div class="category-form">
         <div class="category-form-heading">
             <input type="text" name="category-input" id="category-input" placeholder="Input Category Heading">
         </div>
         <div id="summary"></div>
     </div>
+    <!-- The category container contains all the dynamically added categories as children -->
     <div id="category-container"></div>
+    <!-- Importing library JS from CDN followed by main.js -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/2cdcea010c.js" crossorigin="anonymous"></script>
     <script type="module" src="./assets/js/main.js"></script>

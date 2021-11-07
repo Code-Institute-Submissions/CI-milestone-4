@@ -8,6 +8,11 @@ The HTML validator returned no errors:
 The CSS validator returned no errors:
 ![CSS Validator Success](readme-images/css-validator-results.png)
 
+JSHint results:
+![main.js results](readme-images/JSHint-main.png)
+![category.js results](readme-images/JSHint-category.png)
+![todo.js results](readme-images/JSHint-todo.png)
+
 ## Responsiveness
 
 |              | **Responsive** |

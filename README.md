@@ -26,7 +26,7 @@ When a user initially opens the website they are greeted with a short tutorial o
 ### 1.3. Design
 
 - Colour scheme
-  - A combination of Eastern Blue and Mountain Meadow Green was used to evoke a relaxing feeling as this app is about getting organised.
+  - A combination of Eastern Blue (#278ab0) and Mountain Meadow Green (#1dc690) was used to evoke a relaxing feeling as this app is about getting organised.
 - Typography
   - Sans-serif font are prefered to create an uncluttered appearance.
 - Reactive html
@@ -42,14 +42,14 @@ You can see them [here](readme-images/wireframes/).
 
 ### 2.1. Existing features
 
-**Motivational quote**: Using an API call to a motivational quote API a random motivational quote is displayed in the header, when there is room to do so.
-**Category form**: This form not only allows a user to create a new category but also contains a summary of their categories and prioritised todos. The categories in this list act as links to that associated category.
-**Categories**: The user created categories contain their own list of todos and act as a way of compartmentalising particular tasks. The category title can also be updated or edited.
-**Progess bars**: The progress bars reflect the user's total progress and individual progress and update as new todos are added, completed, or removed.
-**Todos**: Todos are the core element of the application and are contained within categories. They are organised based on various factors.
-**Prioritisation**: Todos can be prioritised to organise them towards the top of their category, prioritising a todo also adds it to the category form's summary.
-**Todo completion**: Once a todo is completed it is placed at the bottom of it's category and it's completion is reflected in the appropriate progress bars.
-**localStorage**: The localStorage of the user's browser is used to maintain their collection of todos per device.
+- **Motivational quote**: Using an API call to a motivational quote API a random motivational quote is displayed in the header, when there is room to do so.
+- **Category form**: This form not only allows a user to create a new category but also contains a summary of their categories and prioritised todos. The categories in this list act as links to that associated category.
+- **Categories**: The user created categories contain their own list of todos and act as a way of compartmentalising particular tasks. The category title can also be updated or edited.
+- **Progess bars**: The progress bars reflect the user's total progress and individual progress and update as new todos are added, completed, or removed.
+- **Todos**: Todos are the core element of the application and are contained within categories. They are organised based on various factors.
+- **Prioritisation**: Todos can be prioritised to organise them towards the top of their category, prioritising a todo also adds it to the category form's summary.
+- **Todo completion**: Once a todo is completed it is placed at the bottom of it's category and it's completion is reflected in the appropriate progress bars.
+- **localStorage**: The localStorage of the user's browser is used to maintain their collection of todos per device.
 
 ### 2.2. Features left to implement in the future
 

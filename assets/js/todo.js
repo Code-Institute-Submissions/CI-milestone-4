@@ -12,6 +12,7 @@ class Todo {
     return this.generateHTML();
   }
   
+  // Generates HTML from data of todo which is returned by the html getter
   generateHTML() {
     return (
       `<div class="todo ${this.completed ? "completed" : ""} ${this.prioritised ? "prioritised" : ""}" data-index=${this.index}>
@@ -20,7 +21,7 @@ class Todo {
         <button class="todo-prioritised" title="Prioritise todo">${this.prioritised ? "<i class='fas fa-star'></i>" : "<i class='far fa-star'></i>"}</button>
         <button class="todo-delete" title="Delete todo"><i class="fas fa-trash-alt"></i></button>
       </div>`
-    )
+    );
   }
 
   // getter returns summarised todo
@@ -28,10 +29,11 @@ class Todo {
     return this.generateSummary();
   }
 
+  // Generates Summary HTML from data of todo which is returned by the summary getter
   generateSummary() {
     return (
       `<li>${this.text.length > 28 ? this.text.substring(0, 27) + "..." : this.text}</li>`
-    )
+    );
   }
 
   // Refresh index
@@ -39,11 +41,12 @@ class Todo {
     this.index = index;
   }
 
-  // Toggles to changed associated state
+  // Toggles todo's completed state
   toggleCompleted() {
     this.completed = !this.completed;
   }
 
+  // Toggles todo's prioritised state
   togglePrioritised() {
     this.prioritised = !this.prioritised;
   }

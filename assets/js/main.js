@@ -75,13 +75,15 @@ $(document).on("click", ".category-delete", function() {
   }
 });
 
+// Todo input listener, any input todo that receives input will add that todo to its associated category
 $(document).on("keyup", ".todo-input", function(evt) {
   if (evt.key === "Enter") {
     let input = stripTags($(this).val().trim());
+    console.log(input.length);
     $(this).val("");
     if (input.length === 0) {
       $(this).attr("placeholder", "Must contain > 1 character");
-    } if (input.length > 240) {
+    } else if (input.length > 240) {
       $(this).attr("placeholder", "Must contain < 240 characters");
     } else {
       $(this).attr("placeholder", "Input todo");
@@ -98,19 +100,21 @@ $(document).on("click", ".todo", function() {
   }
 });
 
-// Uses helper functions in Todo class to toggle associated state
+// Uses helper functions in Todo class to toggle completed
 $(document).on("click", ".todo-completed", function() {
   let todo = $(this).parent();
   ToDoApp.categories[todo.parents(".category").data("category-index")].todos[todo.data("index")].toggleCompleted();
   redraw();
 });
 
+// Uses helper functions in Todo class to toggle prioritised
 $(document).on("click", ".todo-prioritised", function() {
   let todo = $(this).parent();
   ToDoApp.categories[todo.parents(".category").data("category-index")].todos[todo.data("index")].togglePrioritised();
   redraw();
 });
 
+// Removes todo from parent category after prompting for confirmation
 $(document).on("click", ".todo-delete", function() {
   if (confirm("Are you sure you want to delete this todo?")) {
     let todo = $(this).parent();

@@ -13,6 +13,7 @@ class Category {
     return this.generateHTML();
   }
   
+  // Generates HTML from data of category which is returned by the html getter
   generateHTML() {
     // The map call adds all child todos html in priority and completion order
     return (
@@ -37,7 +38,7 @@ class Category {
           }
         </div>
       </div>`
-    )
+    );
   }
 
   // getter returns summarised category along with its prioritised todos
@@ -45,6 +46,7 @@ class Category {
     return this.generateSummary();
   }
 
+  // Generates Summary HTML from data of category which is returned by the summary getter
   generateSummary() {
     return (
       `<li>
@@ -58,7 +60,7 @@ class Category {
           }
         </ul>
       </li>`
-    )
+    );
   }
 
   // Helper function that returns number of completed todos
@@ -71,6 +73,7 @@ class Category {
     this.index = index;
   }
 
+  // Rebinds todos to their new index in the category's todo array to prevent indices becoming decoupled
   refreshTodos() {
     // The combination of a destructured assignment and an entries() call to access element and its index
     for (let [index, todo] of this.todos.entries()) {
@@ -78,10 +81,12 @@ class Category {
     }
   }
 
+  // A function to construct a new todo and push it onto the category's todos array
   addTodo(todo) {
     this.todos.push(new Todo(todo));
   }
 
+  // Removes todo at index from category's todos array
   deleteTodo(index) {
     this.todos.splice(index, 1);
   }
